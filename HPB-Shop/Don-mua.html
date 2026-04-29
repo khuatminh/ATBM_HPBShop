@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn mua của tôi - HPB Sports</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/purchase.css">
+</head>
+<body class="bg-light">
+
+    <header class="py-3 border-bottom bg-white sticky-top">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <a href="Trang-chu.html" class="navbar-brand fw-bold fs-3 text-primary">HPB</a>
+
+                <div>
+                    <span class="text-secondary"><i class="fa-solid fa-phone p-1 fs-5"></i>HOTLINE: 0975496316</span>
+                </div>
+                
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                    <form class="input-group">
+                        <input type="search" class="form-control" placeholder="Tìm sản phẩm..." aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+
+                <div class="text-end header__navbar-item">
+                    <a href="Gio-hang.html" type="button" class="btn btn-link text-dark"><i class="fa-solid fa-cart-shopping fs-5"></i></a>
+                    <div class="header__navbar-user">
+                        <button class="btn btn-link text-dark">
+                            <i class="fa-solid fa-user fs-5"></i>
+                        </button>
+
+                        <ul class="header__navbar-user-menu">
+                            <li class="header__navbar-user-item">
+                                <a href="Ho-so.html">Hồ sơ</a>
+                            </li>
+                            <li class="header__navbar-user-item">
+                                <a href="Don-mua.html">Đơn mua</a>
+                            </li>
+                            <li class="header__navbar-user-item header__navbar-user-item--separate">
+                                <a href="Dang-nhap.html">Đăng xuất</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav justify-content-center fw-bold mt-2">
+                <a class="nav-link text-dark" href="Trang-chu.html">TRANG CHỦ</a>
+                <li class="nav-item dropdown-main">
+                    <a class="nav-link text-dark" href="#">SẢN PHẨM <i class="fa-solid fa-chevron-down x-small"></i></a>
+                    
+                    <ul class="menu-level-1 shadow-sm">
+                        <li class="has-submenu">
+                            <a href="San-pham-theo-hang.html?brand=Yonex">YONEX</a>
+
+                        </li>
+                        
+                        <li class="has-submenu">
+                            <a href="San-pham-theo-hang.html?brand=Lining">LINING</a>
+
+                        </li>
+
+                        <li class="has-submenu">
+                            <a href="San-pham-theo-hang.html?brand=Victor">VICTOR</a>
+
+                        </li>
+                        <li><a href="San-pham-theo-hang.html?brand=Kumpoo">KUMPOO</a></li>
+                        <li><a href="San-pham-theo-hang.html?brand=VNB">VNB</a></li>
+                    </ul>
+                </li>
+                <a class="nav-link text-dark" href="Gioi-thieu.html">GIỚI THIỆU</a>
+                <a class="nav-link text-dark" href="Lien-he.html">LIÊN HỆ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-4">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="assets/image/monleo.jpg" class="rounded-circle me-2 user-img" alt="Avatar">
+                        <div>
+                            <strong id="sidebar-username" class="d-block small">Đang tải...</strong>
+                            <a href="Ho-so.html" class="text-secondary x-small text-decoration-none"><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a>
+                        </div>
+                    </div>
+                    <nav class="nav flex-column side-menu">
+                        <a class="nav-link" href="Ho-so.html"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
+                        <a class="nav-link active" href="Don-mua.html"><i class="fa-solid fa-clipboard-list"></i> Đơn mua</a>
+                    </nav>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="bg-white shadow-sm rounded mb-3">
+                        <ul class="nav nav-justified purchase-tabs" id="order-status-tabs">
+                            <li class="nav-item"><a class="nav-link active" href="#" data-status="all">Tất cả</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-status="pending">Chờ thanh toán</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-status="shipping">Đang giao</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-status="completed">Hoàn thành</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#" data-status="cancelled">Đã hủy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="input-group mb-3 shadow-sm">
+                        <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-secondary"></i></span>
+                        <input id="order-search-input" type="text" class="form-control border-start-0 py-2 small" placeholder="Tìm kiếm theo Mã đơn hàng hoặc Tên sản phẩm...">
+                    </div>
+
+                    <div class="purchase-list" id="purchase-list">
+                        <div class="card border-0 shadow-sm mb-3">
+                            <div class="card-body text-center text-secondary small">Đang tải đơn mua...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-4 text-center text-secondary x-small bg-white border-top mt-5">
+        © 2026 HPB Sports. All rights reserved.
+    </footer>
+
+    <script src="JS/orders.js"></script>
+
+</body>
+</html>

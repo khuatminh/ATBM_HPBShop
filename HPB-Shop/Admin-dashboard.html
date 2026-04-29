@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Quản trị HPB Sports</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/admin-style.css">
+    <link rel="stylesheet" href="assets/css/admin-dashboard.css">
+</head>
+<body class="bg-light">
+
+    <div class="d-flex">
+        <aside class="sidebar bg-white border-end vh-100 sticky-top">
+            <div class="p-4">
+                <a href="Admin-dashboard.html" class="navbar-brand fw-bold fs-3 text-primary">HPB</a>
+            </div>
+            <nav class="nav flex-column mt-2">
+                <p class="px-4 text-secondary x-small fw-bold mb-2">HỆ THỐNG</p>
+                <a class="nav-link active" href="Admin-dashboard.html"><i class="fa-solid fa-table-cells-large me-2"></i> Dashboard</a>
+                <a class="nav-link" href="Admin-QuanLySanPham.html"><i class="fa-solid fa-box me-2"></i> Quản lý sản phẩm</a>
+                <a class="nav-link" href="Admin-inventory.html"><i class="fa-solid fa-box-open me-2"></i> Quản lý kho</a>
+                <a class="nav-link" href="Admin-order.html"><i class="fa-solid fa-cart-shopping me-2"></i> Quản lý đơn hàng</a>
+                <a class="nav-link" href="Admin-user-management.html"><i class="fa-solid fa-users me-2"></i> Quản lý người dùng</a>
+            </nav>
+        </aside>
+
+        <main class="flex-grow-1">
+            <header class="bg-white border-bottom py-2 px-4 d-flex justify-content-between align-items-center sticky-top">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 x-small">
+                        <li class="breadcrumb-item text-secondary">Admin</li>
+                        <li class="breadcrumb-item active fw-bold">Danh mục</li>
+                    </ol>
+                </nav>
+                <div class="admin-user-wrapper position-relative">
+                    <div class="admin-user-info d-flex align-items-center pointer py-1">
+                        <div class="text-end me-3">
+                            <p class="mb-0 small fw-bold admin-name">Mai Anh Hoàng</p>
+                            <p class="mb-0 x-small text-secondary">Tổng Quản trị</p>
+                        </div>
+                        <div class="position-relative">
+                            <img src="/Du_an/HPB/assets/image/monleo.jpg" class="rounded-circle border admin-avatar" alt="Admin" style="width: 40px; height: 40px; object-fit: cover;">
+                            <span class="status-indicator"></span>
+                        </div>
+                    </div>
+                    <ul class="admin-dropdown-menu shadow-sm">
+                        <li><a href="Ho-so.html"><i class="fa-regular fa-user me-2"></i> Hồ sơ Admin</a></li>
+                        <li class="border-top mt-2 pt-2">
+                            <a href="#" class="text-danger fw-bold admin-logout"><i class="fa-solid fa-right-from-bracket me-2"></i> Đăng xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="p-4">
+                <h4 class="fw-bold mb-4">Tổng quan kinh doanh</h4>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm kpi-card bg-primary text-white">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span id="kpi-revenue-label" class="x-small fw-bold text-uppercase opacity-75">Doanh thu tháng</span>
+                                    <i class="fa-solid fa-dollar-sign"></i>
+                                </div>
+                                <h3 id="kpi-monthly-revenue" class="fw-bold mb-0">0₫</h3>
+                                <p class="x-small mb-0 mt-2">Dữ liệu theo tháng hiện tại</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm kpi-card bg-white">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2 text-secondary">
+                                    <span class="x-small fw-bold text-uppercase">Đơn hàng mới</span>
+                                    <i class="fa-solid fa-cart-plus text-success"></i>
+                                </div>
+                                <h3 id="kpi-new-orders" class="fw-bold mb-0 text-dark">0</h3>
+                                <p class="x-small mb-0 mt-2 text-success fw-bold">Đơn phát sinh trong tháng</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm kpi-card bg-white">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2 text-secondary">
+                                    <span class="x-small fw-bold text-uppercase">Khách hàng mới</span>
+                                    <i class="fa-solid fa-user-plus text-info"></i>
+                                </div>
+                                <h3 id="kpi-new-customers" class="fw-bold mb-0 text-dark">0</h3>
+                                <p class="x-small mb-0 mt-2 text-secondary">Khách hàng đăng ký tháng này</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card border-0 shadow-sm kpi-card bg-white">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-2 text-secondary">
+                                    <span class="x-small fw-bold text-uppercase">Tỷ lệ hủy đơn</span>
+                                    <i class="fa-solid fa-ban text-danger"></i>
+                                </div>
+                                <h3 id="kpi-cancel-rate" class="fw-bold mb-0 text-dark">0%</h3>
+                                <p class="x-small mb-0 mt-2 text-danger">Tỷ lệ hủy trên tổng đơn</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="card border-0 shadow-sm p-4">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
+                                <h6 id="revenue-chart-title" class="fw-bold mb-0">Biểu đồ doanh thu theo tháng</h6>
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Lọc doanh thu">
+                                    <button type="button" class="btn btn-outline-primary" data-revenue-period="day">Ngày</button>
+                                    <button type="button" class="btn btn-outline-primary" data-revenue-period="week">Tuần</button>
+                                    <button type="button" class="btn btn-outline-primary active" data-revenue-period="month">Tháng</button>
+                                </div>
+                            </div>
+                            <canvas id="revenueChart" height="120"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card border-0 shadow-sm p-4">
+                            <h6 class="fw-bold mb-4">Cơ cấu hãng bán chạy</h6>
+                            <canvas id="brandChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-md-7">
+                        <div class="card border-0 shadow-sm p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="fw-bold mb-0">Đơn hàng mới nhất</h6>
+                                <a href="#" class="x-small text-decoration-none">Xem tất cả</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle x-small">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Mã đơn</th>
+                                            <th>Khách hàng</th>
+                                            <th>Tổng tiền</th>
+                                            <th>Trạng thái</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="4" class="text-center text-secondary">Đang tải dữ liệu...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card border-0 shadow-sm p-4">
+                            <h6 class="fw-bold mb-3 text-danger"><i class="fa-solid fa-triangle-exclamation me-2"></i>Sắp hết hàng</h6>
+                            <div id="low-stock-list" class="list-group list-group-flush">
+                                <div class="list-group-item px-0 text-secondary border-0 x-small">Đang tải dữ liệu...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="JS/admin-common.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const DASHBOARD_API_URL = 'http://localhost:8080/api/admin/dashboard/summary';
+        const PRODUCT_IMAGE_BASE_PATH = 'assets/image/';
+        const REVENUE_PERIOD_CONFIG = {
+            day: {
+                kpiLabel: 'Doanh thu ngày',
+                chartTitle: 'Biểu đồ doanh thu theo ngày'
+            },
+            week: {
+                kpiLabel: 'Doanh thu tuần',
+                chartTitle: 'Biểu đồ doanh thu theo tuần'
+            },
+            month: {
+                kpiLabel: 'Doanh thu tháng',
+                chartTitle: 'Biểu đồ doanh thu theo tháng'
+            }
+        };
+
+        let revenueChartInstance;
+        let brandChartInstance;
+        let dashboardDataCache = null;
+        let currentRevenuePeriod = 'month';
+
+        function formatVND(value) {
+            const amount = Number(value || 0);
+            return amount.toLocaleString('vi-VN') + '₫';
+        }
+
+        function normalizeChartPoint(point) {
+            if (!point) return null;
+            if (Array.isArray(point)) return { label: point[0], value: Number(point[1] || 0) };
+            if (typeof point === 'object') {
+                const label = point.label || point.date || point[0];
+                const value = Number(point.value || point.total || point.amount || point[1] || 0);
+                return { label, value };
+            }
+            return null;
+        }
+
+        function getRevenuePointsByPeriod(revenueChart, period) {
+            const points = (Array.isArray(revenueChart) ? revenueChart : [])
+                .map(normalizeChartPoint)
+                .filter(Boolean);
+
+            if (period === 'day') {
+                return points.slice(-1);
+            }
+
+            if (period === 'week') {
+                return points.slice(-7);
+            }
+
+            return points;
+        }
+
+        function getRevenueAmountByPeriod(data, period, points) {
+            if (data?.revenueByPeriod != null) return Number(data.revenueByPeriod || 0);
+            if (period === 'day' && data?.dailyRevenue != null) return Number(data.dailyRevenue || 0);
+            if (period === 'week' && data?.weeklyRevenue != null) return Number(data.weeklyRevenue || 0);
+            if (period === 'month' && data?.monthlyRevenue != null) return Number(data.monthlyRevenue || 0);
+
+            return points.reduce((sum, point) => sum + Number(point.value || 0), 0);
+        }
+
+        function formatDateLabel(rawDate) {
+            const date = new Date(rawDate);
+            if (Number.isNaN(date.getTime())) {
+                return String(rawDate || 'N/A');
+            }
+            return date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' });
+        }
+
+        function resolveProductImageUrl(rawImageUrl) {
+            const fallback = 'https://via.placeholder.com/30';
+            if (!rawImageUrl) return fallback;
+
+            const normalized = String(rawImageUrl).trim().replace(/^['\"]+|['\"]+$/g, '');
+            if (!normalized) return fallback;
+            if (/^https?:\/\//i.test(normalized)) return normalized;
+            if (normalized.startsWith('/')) return normalized;
+
+            return `${PRODUCT_IMAGE_BASE_PATH}${normalized}`;
+        }
+
+        function getStatusBadge(status) {
+            const statusMap = {
+                pending: { className: 'bg-warning-light text-warning', text: 'Chờ duyệt' },
+                processing: { className: 'bg-info text-white', text: 'Đang xử lý' },
+                shipping: { className: 'bg-primary text-white', text: 'Đang giao' },
+                completed: { className: 'bg-success-light text-success', text: 'Hoàn thành' },
+                cancelled: { className: 'bg-danger text-white', text: 'Đã hủy' }
+            };
+            return statusMap[String(status || '').toLowerCase()] || {
+                className: 'bg-secondary text-white',
+                text: status || 'Không xác định'
+            };
+        }
+
+        function renderLatestOrders(orders) {
+            const tbody = document.querySelector('table tbody');
+            if (!tbody) return;
+
+            if (!Array.isArray(orders) || orders.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center text-secondary">Chưa có đơn hàng mới</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = orders.map((order) => {
+                const badge = getStatusBadge(order.status);
+                return `
+                    <tr>
+                        <td class="fw-bold">#HPB${String(order.orderId || '').padStart(3, '0')}</td>
+                        <td>${order.user?.fullname || order.user?.username || 'Khách vãng lai'}</td>
+                        <td>${formatVND(order.totalPrice)}</td>
+                        <td><span class="badge ${badge.className}">${badge.text}</span></td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function renderLowStockProducts(products) {
+            const list = document.getElementById('low-stock-list');
+            if (!list) return;
+
+            if (!Array.isArray(products) || products.length === 0) {
+                list.innerHTML = '<div class="list-group-item px-0 text-success border-0 x-small">Kho đang ổn định, chưa có sản phẩm sắp hết.</div>';
+                return;
+            }
+
+            list.innerHTML = products.slice(0, 5).map((product) => {
+                const image = resolveProductImageUrl(product.imageUrl);
+
+                return `
+                    <div class="list-group-item px-0 d-flex justify-content-between align-items-center border-0">
+                        <div class="d-flex align-items-center">
+                            <img src="${image}" class="rounded me-2" alt="${product.name || 'Sản phẩm'}" style="width: 30px; height: 30px; object-fit: cover;">
+                            <span class="x-small fw-bold">${product.name || 'Sản phẩm không tên'}</span>
+                        </div>
+                        <span class="badge bg-danger">Chỉ còn ${product.stock ?? 0}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderRevenueChart(revenueChart) {
+            const ctx = document.getElementById('revenueChart');
+            if (!ctx) return;
+            const points = (Array.isArray(revenueChart) ? revenueChart : [])
+                .map(normalizeChartPoint)
+                .filter(Boolean);
+
+            const labels = points.map((p) => formatDateLabel(p.label));
+            const values = points.map((p) => p.value);
+
+            if (revenueChartInstance) {
+                revenueChartInstance.destroy();
+            }
+
+            revenueChartInstance = new Chart(ctx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: 'Doanh thu (VNĐ)',
+                        data: values,
+                        borderColor: '#6366f1',
+                        tension: 0.4,
+                        fill: true,
+                        backgroundColor: 'rgba(99, 102, 241, 0.1)'
+                    }]
+                },
+                options: {
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function renderRevenueHeader(period) {
+            const config = REVENUE_PERIOD_CONFIG[period] || REVENUE_PERIOD_CONFIG.month;
+            const revenueLabel = document.getElementById('kpi-revenue-label');
+            const chartTitle = document.getElementById('revenue-chart-title');
+            if (revenueLabel) revenueLabel.innerText = config.kpiLabel;
+            if (chartTitle) chartTitle.innerText = config.chartTitle;
+        }
+
+        function renderRevenueByPeriod() {
+            if (!dashboardDataCache) return;
+
+            const periodPoints = getRevenuePointsByPeriod(dashboardDataCache.revenueChart, currentRevenuePeriod);
+            const revenueValue = getRevenueAmountByPeriod(dashboardDataCache, currentRevenuePeriod, periodPoints);
+
+            document.getElementById('kpi-monthly-revenue').innerText = formatVND(revenueValue);
+            renderRevenueHeader(currentRevenuePeriod);
+            renderRevenueChart(periodPoints);
+        }
+
+        function bindRevenuePeriodFilter() {
+            const periodButtons = document.querySelectorAll('[data-revenue-period]');
+            if (!periodButtons.length) return;
+
+            periodButtons.forEach((button) => {
+                button.addEventListener('click', async () => {
+                    const selectedPeriod = button.getAttribute('data-revenue-period');
+                    if (!selectedPeriod || selectedPeriod === currentRevenuePeriod) return;
+
+                    currentRevenuePeriod = selectedPeriod;
+                    periodButtons.forEach((item) => item.classList.remove('active'));
+                    button.classList.add('active');
+
+                    try {
+                        dashboardDataCache = await loadDashboardData(currentRevenuePeriod);
+                        renderRevenueByPeriod();
+                    } catch (error) {
+                        console.error(error);
+                        alert('Không tải được dữ liệu doanh thu theo bộ lọc. Vui lòng thử lại.');
+                    }
+                });
+            });
+        }
+
+        function renderBrandChart(brandChart) {
+            const ctx = document.getElementById('brandChart');
+            if (!ctx) return;
+            const points = (Array.isArray(brandChart) ? brandChart : [])
+                .map(normalizeChartPoint)
+                .filter(Boolean);
+
+            if (brandChartInstance) {
+                brandChartInstance.destroy();
+            }
+
+            brandChartInstance = new Chart(ctx.getContext('2d'), {
+                type: 'doughnut',
+                data: {
+                    labels: points.map((p) => p.label),
+                    datasets: [{
+                        data: points.map((p) => p.value),
+                        backgroundColor: ['#6366f1', '#f43f5e', '#f59e0b', '#10b981', '#3b82f6']
+                    }]
+                },
+                options: {
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+        }
+
+        async function loadDashboardData(period = 'month') {
+            const query = new URLSearchParams({ period: period || 'month' });
+            const response = await fetch(`${DASHBOARD_API_URL}?${query.toString()}`, {
+                headers: window.AdminAuth.authHeaders()
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP_${response.status}`);
+            }
+            return response.json();
+        }
+
+        function renderKpiCards(data) {
+            document.getElementById('kpi-new-orders').innerText = Number(data.newOrders || 0).toLocaleString('vi-VN');
+            document.getElementById('kpi-new-customers').innerText = Number(data.newCustomers || 0).toLocaleString('vi-VN');
+            document.getElementById('kpi-cancel-rate').innerText = `${Number(data.cancelRate || 0).toLocaleString('vi-VN')}%`;
+        }
+
+        async function initDashboard() {
+            const user = window.AdminAuth.requireAdmin();
+            if (!user) return;
+            window.AdminAuth.applyAdminName(user);
+            window.AdminAuth.bindLogoutLinks();
+            bindRevenuePeriodFilter();
+
+            try {
+                const dashboardData = await loadDashboardData(currentRevenuePeriod);
+                dashboardDataCache = dashboardData;
+
+                renderKpiCards(dashboardData);
+                renderLatestOrders(dashboardData.latestOrders);
+                renderLowStockProducts(dashboardData.lowStockProducts);
+                renderRevenueByPeriod();
+                renderBrandChart(dashboardData.brandChart);
+            } catch (error) {
+                console.error(error);
+                if (error.message === 'HTTP_401' || error.message === 'HTTP_403') {
+                    alert('Phiên đăng nhập đã hết hạn hoặc không đủ quyền. Vui lòng đăng nhập lại.');
+                    window.location.href = 'Dang-nhap.html';
+                    return;
+                }
+                alert('Không kết nối được dữ liệu dashboard. Kiểm tra backend đã chạy chưa.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>

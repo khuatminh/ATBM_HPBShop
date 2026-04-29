@@ -1,7 +1,3 @@
-# Sub-projects giữ git history riêng
-HPB-Shop/
-HPB-Shop-BE/
-
 # IDE / OS
 .DS_Store
 .idea/
@@ -12,13 +8,20 @@ HPB-Shop-BE/
 .agent/
 .claude/
 
-# Build artifacts (phòng trường hợp để lẫn)
-target/
-node_modules/
-dist/
-build/
-*.log
+# === Backend (Spring Boot / Maven) ===
+HPB-Shop-BE/web_project/target/
+HPB-Shop-BE/web_project/.mvn/wrapper/maven-wrapper.jar
+HPB-Shop-BE/web_project/**/.classpath
+HPB-Shop-BE/web_project/**/.project
+HPB-Shop-BE/web_project/**/.settings/
+HPB-Shop-BE/web_project/**/*.class
 
-# Tạm
-/tmp/
+# === Frontend ===
+HPB-Shop/node_modules/
+HPB-Shop/dist/
+HPB-Shop/build/
+
+# Logs / tạm
+*.log
 *.swp
+/tmp/

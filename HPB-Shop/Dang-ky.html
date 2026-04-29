@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký tài khoản mới - HPB Sports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CSS phong cách giống image_4.png */
+        * {
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background-color: #f8f9fa; /* Màu nền xám nhạt */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .main-container {
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .register-card {
+            background-color: #ffffff; /* Thẻ trắng */
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px; /* Chiều rộng tối đa phù hợp */
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card-header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            margin-top: 0;
+            color: #1a1a1a;
+        }
+
+        .card-header p {
+            font-size: 16px;
+            color: #666;
+            margin: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #4a4a4a;
+            text-align: left;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #7a82ec;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(122, 130, 236, 0.1);
+        }
+
+        ::placeholder {
+            color: #999;
+        }
+
+        #register-form button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            background-color: #7a82ec; /* Màu xanh tím */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        #register-form button[type="submit"]:hover {
+            background-color: #656cd9;
+        }
+
+        .card-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .card-footer a {
+            color: #7a82ec;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .card-footer a:hover {
+            color: #656cd9;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="register-card">
+            <div class="card-header">
+                <h1>Đăng ký tài khoản mới</h1>
+                <p>Điền thông tin của bạn để tạo tài khoản</p>
+            </div>
+            <form id="register-form" action="/dang-ky" method="POST">
+                <div class="form-group">
+                    <label for="fullname">Họ và tên</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="Nhập họ và tên của bạn" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Tên đăng nhập</label>
+                    <input type="text" id="username" name="username" placeholder="Chọn tên đăng nhập" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <input type="password" id="password" name="password" placeholder="Tạo mật khẩu mạnh" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Nhập lại mật khẩu</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Nhập lại mật khẩu của bạn" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại của bạn" required pattern="[0-9]{10}">
+                </div>
+                <button type="submit">Đăng ký</button>
+            </form>
+            <div class="card-footer">
+                <p>Đã có tài khoản? <a href="Dang-nhap.html">Đăng nhập</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="JS/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+/* checkout.css */
+.bg-light-green { background-color: #e8f5e9; }
+.bg-light-pink { background-color: #fce4ec; }
+.bg-light-blue { background-color: #e3f2fd; }
+
+.item-img-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.item-img-circle img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+}
+
+.form-check {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.form-check:hover {
+    background-color: #f0f7ff;
+}
+
+.form-check-input:checked + .form-check-label {
+    color: #0d6efd;
+}
+
+/* Nút thanh toán */
+.btn-primary {
+    background-color: #6366f1;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #4f46e5;
+}
+
+.x-small {
+    font-size: 12px;
+}

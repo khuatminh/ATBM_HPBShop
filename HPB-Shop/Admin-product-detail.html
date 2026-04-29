@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiet san pham - Admin HPB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/admin-style.css">
+    <link rel="stylesheet" href="assets/css/admin-dashboard.css">
+    <style>
+        .product-main-image {
+            width: 100%;
+            max-height: 420px;
+            object-fit: contain;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 16px;
+        }
+
+        .spec-item {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            background: #fff;
+        }
+
+        .spec-label {
+            font-size: 12px;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        .spec-value {
+            font-size: 14px;
+            color: #0f172a;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="d-flex">
+        <aside class="sidebar bg-white border-end vh-100 sticky-top">
+            <div class="p-4">
+                <a href="Admin-dashboard.html" class="navbar-brand fw-bold fs-3 text-primary">HPB</a>
+            </div>
+            <nav class="nav flex-column mt-2">
+                <p class="px-4 text-secondary x-small fw-bold mb-2 text-uppercase">He thong</p>
+                <a class="nav-link" href="Admin-dashboard.html"><i class="fa-solid fa-table-cells-large me-2"></i> Dashboard</a>
+                <a class="nav-link active" href="Admin-QuanLySanPham.html"><i class="fa-solid fa-box me-2"></i> Quan ly san pham</a>
+                <a class="nav-link" href="Admin-inventory.html"><i class="fa-solid fa-box-open me-2"></i> Quan ly kho</a>
+                <a class="nav-link" href="Admin-order.html"><i class="fa-solid fa-cart-shopping me-2"></i> Quan ly don hang</a>
+                <a class="nav-link" href="Admin-user-management.html"><i class="fa-solid fa-users me-2"></i> Quan ly nguoi dung</a>
+            </nav>
+        </aside>
+
+        <main class="flex-grow-1">
+            <header class="bg-white border-bottom py-2 px-4 d-flex justify-content-between align-items-center sticky-top">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 x-small">
+                        <li class="breadcrumb-item text-secondary">Admin</li>
+                        <li class="breadcrumb-item"><a href="Admin-QuanLySanPham.html" class="text-decoration-none">Quan ly san pham</a></li>
+                        <li class="breadcrumb-item active fw-bold" aria-current="page">Chi tiet</li>
+                    </ol>
+                </nav>
+                <div class="admin-user-wrapper position-relative">
+                    <div class="admin-user-info d-flex align-items-center pointer py-1">
+                        <div class="text-end me-3">
+                            <p class="mb-0 small fw-bold admin-name">Admin</p>
+                            <p class="mb-0 x-small text-secondary">Tong Quan tri</p>
+                        </div>
+                        <div class="position-relative">
+                            <img src="/Du_an/HPB/assets/image/monleo.jpg" class="rounded-circle border admin-avatar" alt="Admin" style="width: 40px; height: 40px; object-fit: cover;">
+                            <span class="status-indicator"></span>
+                        </div>
+                    </div>
+                    <ul class="admin-dropdown-menu shadow-sm">
+                        <li><a href="Ho-so.html"><i class="fa-regular fa-user me-2"></i> Ho so Admin</a></li>
+                        <li class="border-top mt-2 pt-2">
+                            <a href="#" class="text-danger fw-bold admin-logout"><i class="fa-solid fa-right-from-bracket me-2"></i> Dang xuat</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold mb-0">Chi tiet & chinh sua san pham</h4>
+                    <a href="Admin-QuanLySanPham.html" class="btn btn-outline-secondary btn-sm fw-bold">
+                        <i class="fa-solid fa-arrow-left me-2"></i> Quay lai danh sach
+                    </a>
+                </div>
+
+                <div id="detail-alert" class="alert alert-danger d-none" role="alert"></div>
+
+                <div class="row g-4">
+                    <div class="col-lg-5">
+                        <div class="card border-0 shadow-sm p-3">
+                            <img id="product-main-image" class="product-main-image" src="https://via.placeholder.com/500x500?text=No+Image" alt="Product image">
+                            <div class="mt-3">
+                                <h5 id="product-display-name" class="fw-bold mb-1">San pham</h5>
+                                <div class="small text-secondary mb-2">Ma SP: <span id="product-display-id">-</span></div>
+                                <div class="text-primary fw-bold fs-4" id="product-display-price">0d</div>
+                            </div>
+                            <hr>
+                            <div class="row g-2">
+                                <div class="col-6">
+                                    <div class="spec-item">
+                                        <div class="spec-label">Thuong hieu</div>
+                                        <div class="spec-value" id="product-display-brand">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="spec-item">
+                                        <div class="spec-label">Ton kho</div>
+                                        <div class="spec-value" id="product-display-stock">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="spec-item">
+                                        <div class="spec-label">SKU</div>
+                                        <div class="spec-value" id="product-display-sku">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="spec-item">
+                                        <div class="spec-label">Trong luong</div>
+                                        <div class="spec-value" id="product-display-weight">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="spec-item">
+                                        <div class="spec-label">Co can</div>
+                                        <div class="spec-value" id="product-display-grip">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="spec-item">
+                                        <div class="spec-label">Luc cang</div>
+                                        <div class="spec-value" id="product-display-tension">-</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="spec-item">
+                                        <div class="spec-label">Diem can bang</div>
+                                        <div class="spec-value" id="product-display-balance-point">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <div class="spec-label mb-1">Mo ta</div>
+                                <div class="small text-secondary" id="product-display-description">Chua co mo ta</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-3">Cap nhat thong tin</h5>
+                                <form id="admin-product-edit-form">
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-bold">Ten san pham</label>
+                                        <input id="field-name" type="text" class="form-control form-control-sm" required>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold">Thuong hieu</label>
+                                            <input id="field-brand" type="text" class="form-control form-control-sm" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold">Gia ban (d)</label>
+                                            <input id="field-price" type="number" min="0" step="1000" class="form-control form-control-sm" required>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold">Ton kho</label>
+                                            <input id="field-stock" type="number" min="0" class="form-control form-control-sm" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold">SKU</label>
+                                            <input id="field-sku" type="text" class="form-control form-control-sm" placeholder="vd: YNX-100ZZ-4U-G5">
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold">Trong luong (U)</label>
+                                            <input id="field-weight-u" type="text" class="form-control form-control-sm" placeholder="vd: 3U, 4U">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold">Co can (G)</label>
+                                            <input id="field-grip-g" type="text" class="form-control form-control-sm" placeholder="vd: G5">
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold">Luc cang</label>
+                                            <input id="field-tension" type="text" class="form-control form-control-sm" placeholder="vd: 20-28 lbs">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label small fw-bold">Diem can bang</label>
+                                            <input id="field-balance-point" type="text" class="form-control form-control-sm" placeholder="vd: 295mm">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label small fw-bold">Link anh</label>
+                                        <input id="field-image-url" type="text" class="form-control form-control-sm" placeholder="vd: yonex-100zz.jpg">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label small fw-bold">Mo ta</label>
+                                        <textarea id="field-description" rows="4" class="form-control form-control-sm" placeholder="Mo ta ngan ve san pham"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-sm w-100 fw-bold">Luu cap nhat</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/admin-common.js"></script>
+    <script src="JS/admin-product-detail.js"></script>
+</body>
+</html>

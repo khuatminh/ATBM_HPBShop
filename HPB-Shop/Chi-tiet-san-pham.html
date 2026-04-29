@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết sản phẩm - HPB Sports</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/product.css">
+</head>
+<body>
+
+    <header class="py-3 border-bottom bg-white sticky-top">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <a href="Trang-chu.html" class="navbar-brand fw-bold fs-3 text-primary">HPB</a>
+
+                <div>
+                    <span class="text-secondary"><i class="fa-solid fa-phone p-1 fs-5"></i>HOTLINE: 0975496316</span>
+                </div>
+                
+                <div class="col-12 col-lg-6 mb-3 mb-lg-0">
+                    <form class="input-group">
+                        <input type="search" class="form-control" placeholder="Tìm sản phẩm..." aria-label="Search">
+                        <button class="btn btn-outline-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+
+                <div class="text-end header__navbar-item">
+                    <a href="Gio-hang.html" type="button" class="btn btn-link text-dark"><i class="fa-solid fa-cart-shopping fs-5"></i></a>
+                    <div class="header__navbar-user">
+                        <button type="button" class="btn btn-link text-dark">
+                            <i class="fa-solid fa-user fs-5"></i>
+                        </button>
+
+                        <ul class="header__navbar-user-menu">
+                            <li class="header__navbar-user-item">
+                                <a href="Ho-so.html">Hồ sơ</a>
+                            </li>
+                            <li class="header__navbar-user-item">
+                                <a href="Don-mua.html">Đơn mua</a>
+                            </li>
+                            <li class="header__navbar-user-item header__navbar-user-item--separate">
+                                <a href="Dang-nhap.html">Đăng xuất</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav justify-content-center fw-bold mt-2">
+                <a class="nav-link text-dark" href="Trang-chu.html">TRANG CHỦ</a>
+                <a class="nav-link text-dark border-bottom border-primary border-3" href="#">SẢN PHẨM</a>
+                <a class="nav-link text-dark" href="Gioi-thieu.html">GIỚI THIỆU</a>
+                <a class="nav-link text-dark" href="Lien-he.html">LIÊN HỆ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-5">
+        <div class="container">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="Trang-chu.html" class="text-decoration-none">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Vợt cầu lông</a></li>
+                    <li class="breadcrumb-item active" id="breadcrumb-product-name">Chi tiết sản phẩm</li>
+                </ol>
+            </nav>
+
+            <div class="row g-5">
+                <div class="col-md-6">
+                    <div class="border rounded p-3 mb-3 text-center">
+                        <img id="mainImg" src="https://cdn.shopvnb.com/uploads/images/tin_tuc/vot-cau-long-lining-calibar-300c-noi-dia-trung-1-1708995736.webp" class="img-fluid" alt="Main Image">
+                    </div>
+                    
+                    <div class="d-flex gap-2" id="product-thumbs">
+                        <img src="https://cdn.shopvnb.com/uploads/images/tin_tuc/vot-cau-long-lining-calibar-300c-noi-dia-trung-1-1708995736.webp" class="thumb active border" onclick="changeImg(this)" width="80" alt="Thumbnail">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <span class="badge bg-danger-subtle text-danger mb-2" id="product-badge">Mô hình mới</span>
+                    <h1 class="fw-bold mb-2" id="product-name">Vợt Cầu Lông Lining 300c</h1>
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="text-warning small">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star"></i>
+                        </div>
+                        <span class="text-secondary small">(245 Đánh giá)</span>
+                    </div>
+
+                    <h2 class="text-primary fw-bold mb-4" id="product-price">1.500.000 ₫</h2>
+                    <div id="stock-status" class="mb-3 small"></div>
+
+                    <div class="mb-4">
+                        <p class="fw-bold mb-2">Kích thước:</p>
+                        <div class="btn-group" role="group">
+                            <input type="radio" class="btn-check" name="size" id="size3u" checked>
+                            <label class="btn btn-outline-primary px-4" for="size3u">3U</label>
+                            
+                            <input type="radio" class="btn-check" name="size" id="size4u">
+                            <label class="btn btn-outline-primary px-4" for="size4u">4U</label>
+
+                            <input type="radio" class="btn-check" name="size" id="size5u">
+                            <label class="btn btn-outline-primary px-4" for="size5u">5U</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="fw-bold mb-2">Số lượng:</p>
+                        <div class="input-group mb-3" style="width: 140px;">
+                            <button class="btn btn-outline-secondary" onclick="updateQty(-1)">-</button>
+                            <input type="text" id="qty" class="form-control text-center" value="1">
+                            <button class="btn btn-outline-secondary" onclick="updateQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-3">
+                        <button id="add-to-cart-btn" class="btn btn-primary btn-lg px-5 py-3 flex-grow-1 fw-bold">Thêm vào giỏ hàng</button>
+                        <button id="buy-now-btn" class="btn btn-outline-primary btn-lg px-5 py-3 fw-bold">Mua ngay</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 pt-5">
+                <ul class="nav nav-tabs justify-content-center border-bottom-0" id="productTab" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active fw-bold px-5" id="spec-tab" data-bs-toggle="tab" data-bs-target="#spec" type="button">Thông số kỹ thuật</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link fw-bold px-5" id="desc-tab" data-bs-toggle="tab" data-bs-target="#desc" type="button">Mô tả</button>
+                    </li>
+                </ul>
+                <div class="tab-content border-top pt-4" id="productTabContent">
+                    <div class="tab-pane fade show active" id="spec">
+                        <div class="table-responsive mx-auto" style="max-width: 800px;">
+                            <table class="table table-striped align-middle">
+                                <tbody id="product-specs">
+                                    <tr><td class="text-secondary py-3">Đang tải...</td><td class="fw-bold">...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="desc">
+                        <p class="text-secondary" id="product-description">Đang tải mô tả sản phẩm...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h4 class="fw-bold text-primary mb-3">HPB Sports</h4>
+                    <p class="text-secondary small">
+                        HPB Sports là hệ thống cửa hàng cầu lông hàng đầu Việt Nam, chuyên cung cấp các sản phẩm cầu lông chính hãng từ các thương hiệu nổi tiếng thế giới.
+                    </p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <h6 class="fw-bold mb-3">Thông tin</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Về chúng tôi</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản dịch vụ</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">Hỗ trợ khách hàng</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Trung tâm trợ giúp</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Hướng dẫn mua hàng</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">Liên hệ</h6>
+                    <ul class="list-unstyled contact-info">
+                        <li class="mb-2"><i class="fa-solid fa-location-dot me-2"></i> Số 221B Yên Xá, Tân Triều, Thanh Trì, Hà Đông</li>
+                        <li class="mb-2"><i class="fa-solid fa-phone me-2"></i> 0975496316</li>
+                        <li><i class="fa-solid fa-envelope me-2"></i> hoangpu@hpbsports.vn</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center text-secondary small mt-5">
+                © 2026 HPB Sports. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_PRODUCTS_URL = "http://localhost:8080/api/products";
+        const API_CART_URL = "http://localhost:8080/api/customer/cart";
+        const PRODUCT_IMAGE_BASE_PATH = "assets/image/";
+        let currentProduct = null;
+
+        function getCurrentUser() {
+            try {
+                const rawUser = localStorage.getItem("user");
+                return rawUser ? JSON.parse(rawUser) : null;
+            } catch (error) {
+                console.error("Không đọc được user trong localStorage:", error);
+                return null;
+            }
+        }
+
+        function setupAuthMenu() {
+            const userMenu = document.querySelector(".header__navbar-user-menu");
+            if (!userMenu) return;
+
+            const currentUser = getCurrentUser();
+            if (!currentUser || !currentUser.userId) {
+                userMenu.innerHTML = `
+                    <li class="header__navbar-user-item"><a href="Dang-nhap.html">Đăng nhập</a></li>
+                    <li class="header__navbar-user-item header__navbar-user-item--separate"><a href="Dang-ky.html">Đăng ký</a></li>
+                `;
+                return;
+            }
+
+            userMenu.innerHTML = `
+                <li class="header__navbar-user-item"><a href="Ho-so.html">Hồ sơ</a></li>
+                <li class="header__navbar-user-item"><a href="Don-mua.html">Đơn mua</a></li>
+                <li class="header__navbar-user-item header__navbar-user-item--separate"><a href="Dang-nhap.html" data-action="logout">Đăng xuất</a></li>
+            `;
+
+            const logoutLink = userMenu.querySelector('[data-action="logout"]');
+            if (logoutLink) {
+                logoutLink.addEventListener("click", () => {
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("token");
+                });
+            }
+        }
+
+        function formatPrice(price) {
+            const numericPrice = Number(price || 0);
+            return `${numericPrice.toLocaleString("vi-VN")} ₫`;
+        }
+
+        function resolveProductImageUrl(rawImageUrl) {
+            const fallback = "https://via.placeholder.com/600x600?text=No+Image";
+            if (!rawImageUrl) return fallback;
+
+            const normalized = String(rawImageUrl).trim().replace(/^['"]+|['"]+$/g, "");
+            if (!normalized) return fallback;
+            if (/^https?:\/\//i.test(normalized)) return normalized;
+            if (normalized.startsWith("/")) return normalized;
+            return `${PRODUCT_IMAGE_BASE_PATH}${normalized}`;
+        }
+
+        function getProductField(product, keys, fallback = "") {
+            if (!product || !Array.isArray(keys)) return fallback;
+            for (const key of keys) {
+                const value = product[key];
+                if (value !== null && value !== undefined && String(value).trim() !== "") {
+                    return value;
+                }
+            }
+            return fallback;
+        }
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\"/g, "&quot;")
+                .replace(/'/g, "&#39;");
+        }
+
+        function renderSpecs(product) {
+            const specsBody = document.getElementById("product-specs");
+            if (!specsBody) return;
+
+            const specs = [
+                { label: "Thương hiệu", value: getProductField(product, ["brand"]) },
+                { label: "Trọng lượng", value: getProductField(product, ["weight_u", "weightU"]) },
+                { label: "Kích thước cán vợt", value: getProductField(product, ["grip_g", "gripG"]) },
+                { label: "Lực căng", value: getProductField(product, ["tension"]) },
+                { label: "Điểm cân bằng", value: getProductField(product, ["balance_point", "balancePoint"]) },
+                { label: "SKU", value: getProductField(product, ["sku"]) },
+                { label: "Tồn kho", value: getProductField(product, ["stock"]) }
+            ].filter((item) => item.value !== null && item.value !== undefined && String(item.value).trim() !== "");
+
+            if (specs.length === 0) {
+                specsBody.innerHTML = "<tr><td class='text-secondary py-3'>Thông số</td><td class='fw-bold'>Đang cập nhật</td></tr>";
+                return;
+            }
+
+            specsBody.innerHTML = specs
+                .map((item) => `<tr><td class="text-secondary py-3">${escapeHtml(item.label)}</td><td class="fw-bold">${escapeHtml(item.value)}</td></tr>`)
+                .join("");
+        }
+
+        function renderProductDetail(product) {
+            currentProduct = product;
+            const productName = getProductField(product, ["name", "productName"], "Sản phẩm");
+            const imageUrl = resolveProductImageUrl(getProductField(product, ["imageUrl", "image_url"], ""));
+            const stock = Number(getProductField(product, ["stock"], 0));
+            const isOutOfStock = stock <= 0;
+
+            document.title = `${productName} - HPB Sports`;
+            document.getElementById("product-name").textContent = productName;
+            document.getElementById("breadcrumb-product-name").textContent = productName;
+            document.getElementById("product-price").textContent = formatPrice(getProductField(product, ["price"], 0));
+            document.getElementById("product-description").textContent = getProductField(product, ["description"], "Đang cập nhật mô tả sản phẩm.");
+            document.getElementById("mainImg").src = imageUrl;
+            document.getElementById("mainImg").alt = productName;
+
+            const productBadge = document.getElementById("product-badge");
+            if (productBadge) {
+                if (isOutOfStock) {
+                    productBadge.textContent = "Hết hàng";
+                    productBadge.className = "badge bg-danger text-white mb-2";
+                } else {
+                    const brand = getProductField(product, ["brand"], "");
+                    productBadge.textContent = brand ? `Thương hiệu ${brand}` : "Sản phẩm mới";
+                    productBadge.className = "badge bg-danger-subtle text-danger mb-2";
+                }
+            }
+
+            const stockStatus = document.getElementById("stock-status");
+            if (stockStatus) {
+                if (isOutOfStock) {
+                    stockStatus.innerHTML = '<span class="badge bg-danger">Hết hàng</span>';
+                } else {
+                    stockStatus.innerHTML = `<span class="badge bg-success">Còn hàng: ${stock}</span>`;
+                }
+            }
+
+            const addToCartButton = document.getElementById("add-to-cart-btn");
+            const buyNowButton = document.getElementById("buy-now-btn");
+            if (addToCartButton) addToCartButton.disabled = isOutOfStock;
+            if (buyNowButton) buyNowButton.disabled = isOutOfStock;
+
+            const qtyInput = document.getElementById("qty");
+            if (qtyInput) {
+                qtyInput.value = "1";
+                qtyInput.disabled = isOutOfStock;
+            }
+
+            const thumbs = document.getElementById("product-thumbs");
+            if (thumbs) {
+                thumbs.innerHTML = `<img src="${imageUrl}" class="thumb active border" onclick="changeImg(this)" width="80" alt="${productName}">`;
+            }
+
+            renderSpecs(product);
+        }
+
+        function getAuthData() {
+            const user = getCurrentUser();
+            const token = localStorage.getItem("token");
+            return { user, token };
+        }
+
+        function getSelectedQuantity() {
+            const qtyInput = document.getElementById("qty");
+            const quantity = Number(qtyInput ? qtyInput.value : 1);
+            return Number.isFinite(quantity) && quantity > 0 ? quantity : 1;
+        }
+
+        async function addCurrentProductToCart() {
+            const { user, token } = getAuthData();
+            if (!user || !user.userId || !token) {
+                alert("Bạn cần đăng nhập trước khi thêm vào giỏ hàng.");
+                window.location.href = "Dang-nhap.html";
+                return false;
+            }
+
+            if (!currentProduct || !currentProduct.productId) {
+                alert("Không xác định được sản phẩm để thêm vào giỏ hàng.");
+                return false;
+            }
+
+            const stock = Number(currentProduct.stock || 0);
+            const quantity = getSelectedQuantity();
+            if (stock <= 0) {
+                alert("Sản phẩm này đã hết hàng.");
+                return false;
+            }
+            if (quantity > stock) {
+                alert(`Số lượng vượt quá tồn kho. Chỉ còn ${stock} sản phẩm.`);
+                return false;
+            }
+
+            const payload = {
+                userId: user.userId,
+                productId: currentProduct.productId,
+                quantity
+            };
+
+            const response = await fetch(`${API_CART_URL}/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const message = await response.text();
+                throw new Error(message || "Không thể thêm sản phẩm vào giỏ hàng");
+            }
+
+            return true;
+        }
+
+        function setupPurchaseActions() {
+            const addToCartButton = document.getElementById("add-to-cart-btn");
+            const buyNowButton = document.getElementById("buy-now-btn");
+
+            if (addToCartButton) {
+                addToCartButton.addEventListener("click", async () => {
+                    try {
+                        const ok = await addCurrentProductToCart();
+                        if (ok) {
+                            alert("Đã thêm sản phẩm vào giỏ hàng.");
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        alert(error.message || "Có lỗi khi thêm vào giỏ hàng.");
+                    }
+                });
+            }
+
+            if (buyNowButton) {
+                buyNowButton.addEventListener("click", async () => {
+                    try {
+                        const ok = await addCurrentProductToCart();
+                        if (ok) {
+                            window.location.href = "Thanh-toan.html";
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        alert(error.message || "Có lỗi khi xử lý mua ngay.");
+                    }
+                });
+            }
+        }
+
+        async function loadProductFromQuery() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get("id");
+
+            if (!id) {
+                alert("Thiếu mã sản phẩm. Vui lòng quay lại trang chủ.");
+                window.location.href = "Trang-chu.html";
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_PRODUCTS_URL}/${encodeURIComponent(id)}`);
+                if (!response.ok) {
+                    throw new Error("Không tìm thấy sản phẩm");
+                }
+
+                const product = await response.json();
+                renderProductDetail(product);
+            } catch (error) {
+                console.error(error);
+                alert("Không tải được chi tiết sản phẩm. Vui lòng thử lại!");
+                window.location.href = "Trang-chu.html";
+            }
+        }
+
+        // Hàm đổi ảnh chính khi click thumb
+        function changeImg(element) {
+            document.getElementById('mainImg').src = element.src;
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // Hàm tăng giảm số lượng
+        function updateQty(val) {
+            let qty = document.getElementById('qty');
+            let current = parseInt(qty.value);
+            const stock = Number(currentProduct?.stock || 0);
+            if (stock <= 0) return;
+            if (current + val >= 1 && current + val <= stock) qty.value = current + val;
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            setupAuthMenu();
+            await loadProductFromQuery();
+            setupPurchaseActions();
+        });
+    </script>
+</body>
+</html>

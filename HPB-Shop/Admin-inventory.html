@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Quản lý tồn kho - HPB Sports</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/admin-style.css">
+</head>
+<body class="bg-light">
+
+    <div class="d-flex">
+        <aside class="sidebar bg-white border-end vh-100 sticky-top">
+            <div class="p-4">
+                <a href="Admin-dashboard.html" class="navbar-brand fw-bold fs-3 text-primary">HPB</a>
+            </div>
+            <nav class="nav flex-column mt-2">
+                <p class="px-4 text-secondary x-small fw-bold mb-2">HỆ THỐNG</p>
+                <a class="nav-link" href="Admin-dashboard.html"><i class="fa-solid fa-table-cells-large me-2"></i> Dashboard</a>
+                <a class="nav-link" href="Admin-QuanLySanPham.html"><i class="fa-solid fa-box me-2"></i> Quản lý sản phẩm</a>
+                <a class="nav-link active" href="Admin-inventory.html"><i class="fa-solid fa-box-open me-2"></i> Quản lý kho</a>
+                <a class="nav-link" href="Admin-order.html"><i class="fa-solid fa-cart-shopping me-2"></i> Quản lý đơn hàng</a>
+                <a class="nav-link" href="Admin-user-management.html"><i class="fa-solid fa-users me-2"></i> Quản lý người dùng</a>
+            </nav>
+        </aside>
+
+        <main class="flex-grow-1">
+            <header class="bg-white border-bottom py-2 px-4 d-flex justify-content-between align-items-center sticky-top">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 x-small">
+                        <li class="breadcrumb-item text-secondary">Admin</li>
+                        <li class="breadcrumb-item active fw-bold">Quản lý kho</li>
+                    </ol>
+                </nav>
+
+                <div class="admin-user-wrapper position-relative">
+                    <div class="admin-user-info d-flex align-items-center pointer py-1">
+                        <div class="text-end me-3">
+                            <p class="mb-0 small fw-bold admin-name">Mai Anh Hoàng</p>
+                            <p class="mb-0 x-small text-secondary">Tổng Quản trị</p>
+                        </div>
+                        <div class="position-relative">
+                            <img src="/Du_an/HPB/assets/image/monleo.jpg" class="rounded-circle border admin-avatar" alt="Admin" style="width: 40px; height: 40px; object-fit: cover;">
+                            <span class="status-indicator"></span>
+                        </div>
+                        <ul class="admin-dropdown-menu shadow-sm">
+                            <li><a href="Ho-so.html"><i class="fa-regular fa-user me-2"></i> Hồ sơ Admin</a></li>
+                            <li class="border-top mt-2 pt-2">
+                                <a href="#" class="text-danger fw-bold admin-logout"><i class="fa-solid fa-right-from-bracket me-2"></i> Đăng xuất</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-4">
+                <h3 class="fw-bold mb-1">Quản lý tồn kho hàng hóa</h3>
+                <p class="text-secondary small mb-4">Theo dõi số lượng, quản lý nhập xuất và lịch sử biến động kho hàng.</p>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-box bg-primary-light text-primary rounded me-3"><i class="fa-solid fa-box"></i></div>
+                                <div>
+                                    <p class="text-secondary small mb-0">Tổng sản phẩm</p>
+                                    <h4 class="fw-bold mb-0" id="total-products-kpi">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-box bg-danger-light text-danger rounded me-3"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                <div>
+                                    <p class="text-secondary small mb-0">Sản phẩm sắp hết</p>
+                                    <h4 class="fw-bold mb-0" id="low-stock-kpi">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm p-3">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-box bg-success-light text-success rounded me-3"><i class="fa-solid fa-circle-plus"></i></div>
+                                <div>
+                                    <p class="text-secondary small mb-0">Tổng tồn kho</p>
+                                    <h4 class="fw-bold mb-0" id="total-stock-kpi">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm mb-5">
+                    <div class="card-header bg-white py-3 border-0 d-flex justify-content-between align-items-center">
+                        <h6 class="fw-bold mb-0">Danh sách sản phẩm trong kho</h6>
+                        <div class="d-flex gap-2">
+                            <div class="input-group input-group-sm">
+                                <button class="input-group-text bg-light border-end-0" id="search-btn" type="button" style="cursor: pointer;">
+                                        <i class="fa-solid fa-magnifying-glass text-secondary"></i>
+                                </button>                                
+                                <input id="search-input" type="text" class="form-control bg-light border-start-0" placeholder="Tìm kiếm sản phẩm...">
+                            </div>
+                            <button class="btn btn-primary btn-sm px-3 text-nowrap" data-bs-toggle="modal" data-bs-target="#importModal">
+                                <i class="fa-solid fa-circle-plus me-1"></i> Nhập hàng mới
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0">
+                            <thead class="bg-light x-small text-secondary">
+                                <tr>
+                                    <th class="ps-4">ID</th>
+                                    <th>THÔNG TIN SẢN PHẨM</th>
+                                    <th>HÃNG</th>
+                                    <th>TỒN KHO</th>
+                                    <th>TRẠNG THÁI</th>
+                                    <th class="text-end pe-4">HÀNH ĐỘNG</th>
+                                </tr>
+                            </thead>
+                            <tbody class="small" id="inventoryTableBody">
+                                <tr><td colspan="5" class="text-center py-4 text-secondary">Đang tải dữ liệu...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-3 border-top">
+                        <nav aria-label="Phân trang danh sách sản phẩm kho">
+                            <ul id="inventory-pagination" class="pagination pagination-sm justify-content-end mb-0"></ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <h6 class="fw-bold mb-3"><i class="fa-solid fa-clock-rotate-left me-2 text-primary"></i>Lịch sử thay đổi kho</h6>
+                <div class="table-responsive bg-white rounded shadow-sm">
+                    <table class="table align-middle mb-0">
+                        <thead class="bg-light x-small text-secondary">
+                            <tr>
+                                <th class="ps-4">THỜI GIAN</th>
+                                <th>SẢN PHẨM</th>
+                                <th>THAY ĐỔI</th>
+                                <th>LOẠI</th>
+                                <th class="pe-4">GHI CHÚ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="small" id="logTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal fade" id="importModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title fw-bold">Phiếu nhập kho hàng hóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="importForm">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Chọn sản phẩm</label>
+                            <select class="form-select form-select-sm" id="importProductId" required>
+                                </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Số lượng nhập thêm</label>
+                            <input type="number" class="form-control form-control-sm" id="importAmount" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Lý do / Ghi chú</label>
+                            <textarea class="form-control form-control-sm" id="importReason" placeholder="Vd: Nhập hàng bổ sung tháng 3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm w-100 fw-bold">Xác nhận nhập kho</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/admin-common.js"></script>
+    <script src="JS/admin-inventory.js"></script>
+</body>
+</html>

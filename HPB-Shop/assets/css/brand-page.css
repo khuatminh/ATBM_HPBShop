@@ -1,0 +1,39 @@
+/* brand-page.css */
+.x-small { font-size: 11px; }
+
+/* Sidebar Filter */
+.filter-section {
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+.filter-section:last-child {
+    border-bottom: none;
+}
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* Product Card Tinh chỉnh */
+.product-link .card-title {
+    text-decoration: none !important;
+}
+
+.product-card-hover {
+    transition: 0.3s;
+    cursor: pointer;
+}
+.product-card-hover:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+.product-card-hover img {
+    height: 220px;
+    object-fit: contain;
+}
+
+/* Badge Premium màu cam giống mẫu */
+.badge.bg-warning {
+    background-color: #f39c12 !important;
+    font-size: 10px;
+}

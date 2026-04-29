@@ -1,0 +1,19 @@
+/* product.css */
+/* Khống chế kích thước cho các ảnh nhỏ (thumbnail) */
+.thumb {
+    width: 80px;         /* Độ rộng bạn muốn */
+    height: 80px;        /* Chiều cao bạn muốn */
+    object-fit: cover;   /* Giúp ảnh không bị móp méo khi bị ép kích thước */
+    cursor: pointer;     /* Hiện bàn tay khi rê chuột vào */
+    border: 2px solid transparent; 
+    margin-right: 5px;
+    border-radius: 4px;  /* Bo góc cho đẹp */
+}
+
+
+/* Đối với ảnh chính (mainImg), nên để nó co dãn theo khung */
+#mainImg {
+    width: 100%;
+    max-width: 500px;    /* Giới hạn ảnh chính không quá to */
+    height: auto;
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý sản phẩm - HPB Sports</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/admin-style.css">
+    <link rel="stylesheet" href="assets/css/admin-dashboard.css">
+    <style>
+        .product-img-td { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+        .badge-brand { background-color: #f1f5f9; color: #475569; font-weight: 600; }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div class="d-flex">
+        <aside class="sidebar bg-white border-end vh-100 sticky-top">
+            <div class="p-4">
+                <a href="Admin-dashboard.html" class="navbar-brand fw-bold fs-3 text-primary">HPB</a>
+            </div>
+            <nav class="nav flex-column mt-2">
+                <p class="px-4 text-secondary x-small fw-bold mb-2 text-uppercase">Hệ thống</p>
+                <a class="nav-link" href="Admin-dashboard.html"><i class="fa-solid fa-table-cells-large me-2"></i> Dashboard</a>
+                <a class="nav-link active" href="Admin-QuanLySanPham.html"><i class="fa-solid fa-box me-2"></i> Quản lý sản phẩm</a>
+                <a class="nav-link" href="Admin-inventory.html"><i class="fa-solid fa-box-open me-2"></i> Quản lý kho</a>
+                <a class="nav-link" href="Admin-order.html"><i class="fa-solid fa-cart-shopping me-2"></i> Quản lý đơn hàng</a>
+                <a class="nav-link" href="Admin-user-management.html"><i class="fa-solid fa-users me-2"></i> Quản lý người dùng</a>
+            </nav>
+        </aside>
+
+        <main class="flex-grow-1">
+            <header class="bg-white border-bottom py-2 px-4 d-flex justify-content-between align-items-center sticky-top">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 x-small">
+                        <li class="breadcrumb-item text-secondary">Admin</li>
+                        <li class="breadcrumb-item active fw-bold">Quản lý sản phẩm</li>
+                    </ol>
+                </nav>
+                <div class="admin-user-wrapper position-relative">
+                    <div class="admin-user-info d-flex align-items-center pointer py-1">
+                        <div class="text-end me-3">
+                            <p class="mb-0 small fw-bold admin-name">Mai Anh Hoàng</p>
+                            <p class="mb-0 x-small text-secondary">Tổng Quản trị</p>
+                        </div>
+                        <div class="position-relative">
+                            <img src="/Du_an/HPB/assets/image/monleo.jpg" class="rounded-circle border admin-avatar" alt="Admin" style="width: 40px; height: 40px; object-fit: cover;">
+                            <span class="status-indicator"></span>
+                        </div>
+                    </div>
+                    <ul class="admin-dropdown-menu shadow-sm">
+                        <li><a href="Ho-so.html"><i class="fa-regular fa-user me-2"></i> Hồ sơ Admin</a></li>
+                        <li class="border-top mt-2 pt-2">
+                            <a href="#" class="text-danger fw-bold admin-logout"><i class="fa-solid fa-right-from-bracket me-2"></i> Đăng xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="fw-bold mb-0">Danh mục sản phẩm</h4>
+                    <button class="btn btn-primary btn-sm fw-bold px-3" data-bs-toggle="modal" data-bs-target="#productModal" onclick="prepareAdd()">
+                        <i class="fa-solid fa-plus me-2"></i> Thêm sản phẩm mới
+                    </button>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm p-3">
+                            <div class="text-secondary x-small fw-bold text-uppercase">Tổng loại vợt</div>
+                            <h3 class="fw-bold mb-0" id="stat-total-products">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm p-3">
+                            <div class="text-secondary x-small fw-bold text-uppercase">Giá trị kho ước tính</div>
+                            <h3 class="fw-bold mb-0 text-success" id="stat-total-value">0đ</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm p-3">
+                            <div class="text-secondary x-small fw-bold text-uppercase">Thương hiệu</div>
+                            <h3 class="fw-bold mb-0 text-primary" id="stat-total-brands">0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm p-4">
+                    <div class="mb-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-white"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <input id="product-search-input" type="text" class="form-control" placeholder="Tìm theo mã hoặc tên sản phẩm...">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle x-small">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Thương hiệu</th>
+                                    <th>Giá bán</th>
+                                    <th>Tồn kho</th>
+                                    <th class="text-end">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productTableBody">
+                                </tbody>
+                        </table>
+                    </div>
+                    <nav class="mt-3" aria-label="Phân trang sản phẩm admin">
+                        <ul id="product-pagination" class="pagination pagination-sm justify-content-end mb-0"></ul>
+                    </nav>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal fade" id="productModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title fw-bold" id="modalTitle">Thêm sản phẩm</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="productForm">
+                        <input type="hidden" id="productId">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Tên sản phẩm</label>
+                            <input type="text" class="form-control form-control-sm" id="productName" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label small fw-bold">Thương hiệu</label>
+                                <input type="text" class="form-control form-control-sm" id="brand" list="brand-list" placeholder="vd: Yonex, Lining" required>
+                                <datalist id="brand-list">
+                                    <option value="Yonex"></option>
+                                    <option value="Lining"></option>
+                                    <option value="Victor"></option>
+                                </datalist>
+                            </div>
+                            <div class="col">
+                                <label class="form-label small fw-bold">Giá bán (đ)</label>
+                                <input type="number" class="form-control form-control-sm" id="price" min="0" step="1000" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Số lượng kho</label>
+                            <input type="number" class="form-control form-control-sm" id="stock" min="0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">SKU</label>
+                            <input type="text" class="form-control form-control-sm" id="sku" placeholder="vd: YNX-100ZZ-4U-G5">
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label small fw-bold">Trọng lượng (U)</label>
+                                <input type="text" class="form-control form-control-sm" id="weightU" placeholder="vd: 3U, 4U">
+                            </div>
+                            <div class="col">
+                                <label class="form-label small fw-bold">Cỡ cán (G)</label>
+                                <input type="text" class="form-control form-control-sm" id="gripG" placeholder="vd: G5">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label class="form-label small fw-bold">Lực căng</label>
+                                <input type="text" class="form-control form-control-sm" id="tension" placeholder="vd: 20-28 lbs">
+                            </div>
+                            <div class="col">
+                                <label class="form-label small fw-bold">Điểm cân bằng</label>
+                                <input type="text" class="form-control form-control-sm" id="balancePoint" placeholder="vd: 295mm">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Link ảnh</label>
+                            <input type="text" class="form-control form-control-sm" id="imageUrl" placeholder="vd: yonex-100zz.jpg">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Mô tả sản phẩm</label>
+                            <textarea class="form-control form-control-sm" id="description" rows="3" placeholder="Mô tả ngắn về sản phẩm"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm w-100 fw-bold">Lưu thông tin</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="JS/admin-common.js"></script>
+    <script src="JS/admin-product.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+/* cart.css */
+
+.qty-box {
+    width: 100px;
+}
+
+.qty-box input {
+    border-left: none;
+    border-right: none;
+    font-size: 13px;
+}
+
+.qty-box .btn {
+    background-color: #fff;
+    border-color: #dee2e6;
+    color: #333;
+}
+
+.qty-box .btn:hover {
+    background-color: #f8f9fa;
+}
+
+.table img {
+    height: 70px;
+    object-fit: contain;
+}
+
+.table th {
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-top: none;
+}
+
+/* Hiệu ứng cho nút xóa */
+.text-danger:hover {
+    color: #dc3545 !important;
+    transform: scale(1.1);
+}

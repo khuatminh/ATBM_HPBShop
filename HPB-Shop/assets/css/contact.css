@@ -1,0 +1,29 @@
+/* contact.css */
+.x-small { font-size: 12px; }
+
+.contact-form .form-control {
+    border-radius: 2px;
+    border-color: #e9ecef;
+}
+
+.contact-form .form-control:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+
+.store-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.store-list::-webkit-scrollbar-thumb {
+    background: #e9ecef;
+    border-radius: 10px;
+}
+
+.store-item:last-child {
+    border-bottom: none !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: ">";
+}

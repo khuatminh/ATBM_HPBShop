@@ -1,0 +1,29 @@
+/* admin-dashboard.css */
+.kpi-card {
+    transition: transform 0.3s ease;
+    border-radius: 12px;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px);
+}
+
+.bg-primary {
+    background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+}
+
+.bg-warning-light { background-color: #fffbeb; }
+.bg-success-light { background-color: #f0fdf4; }
+
+.pointer { cursor: pointer; }
+
+/* Tinh chỉnh canvas biểu đồ */
+canvas {
+    max-width: 100%;
+}
+
+.admin-dropdown-menu {
+    top: 100%;
+    right: 0;
+    z-index: 1050;
+}

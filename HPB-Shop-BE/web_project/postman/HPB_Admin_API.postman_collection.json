@@ -1,0 +1,440 @@
+{
+  "info": {
+    "name": "HPB Admin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Postman collection for HPB admin APIs. Run Login first to set adminToken automatically."
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" },
+    { "key": "adminToken", "value": "" },
+    { "key": "adminProductId", "value": "1" },
+    { "key": "adminOrderId", "value": "1" },
+    { "key": "adminUserId", "value": "1" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"loginId\": \"admin\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "  var json = pm.response.json();",
+                  "  if (json.token) pm.collectionVariables.set('adminToken', json.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Admin - Dashboard",
+      "item": [
+        {
+          "name": "Get Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/dashboard/summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "dashboard", "summary"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "products"]
+            }
+          }
+        },
+        {
+          "name": "Get Product By Id",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/products/{{adminProductId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "products", "{{adminProductId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Yonex Astrox 100 ZZ\",\n  \"brand\": \"Yonex\",\n  \"price\": 4590000,\n  \"stock\": 20,\n  \"imageUrl\": \"yonex-astrox-100zz.jpg\",\n  \"description\": \"Head-heavy racket\",\n  \"weight_u\": \"4U\",\n  \"grip_g\": \"G5\",\n  \"tension\": \"20-28 lbs\",\n  \"balance_point\": \"Head Heavy\",\n  \"sku\": \"YONEX-A100ZZ-4UG5\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "products"]
+            }
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Yonex Astrox 100 ZZ - Updated\",\n  \"brand\": \"Yonex\",\n  \"price\": 4690000,\n  \"stock\": 18,\n  \"imageUrl\": \"/Du_an/HPB_FE/assets/image/yonex-astrox-100zz.jpg\",\n  \"description\": \"Updated by Postman\",\n  \"weight_u\": \"4U\",\n  \"grip_g\": \"G5\",\n  \"tension\": \"20-29 lbs\",\n  \"balance_point\": \"Head Heavy\",\n  \"sku\": \"YONEX-A100ZZ-4UG5\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/products/{{adminProductId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "products", "{{adminProductId}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/products/{{adminProductId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "products", "{{adminProductId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Orders",
+      "item": [
+        {
+          "name": "Get Orders (All)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/orders",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Get Orders By Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/orders?status=pending",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "orders"],
+              "query": [
+                { "key": "status", "value": "pending" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Order Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"processing\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/orders/{{adminOrderId}}/status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "orders", "{{adminOrderId}}", "status"]
+            }
+          }
+        },
+        {
+          "name": "Get Order Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/orders/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "orders", "stats"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Inventory",
+      "item": [
+        {
+          "name": "Get Inventory Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/inventory/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "inventory", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Get Inventory Products",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/inventory/products",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "inventory", "products"]
+            }
+          }
+        },
+        {
+          "name": "Get Inventory Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/inventory/logs",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "inventory", "logs"]
+            }
+          }
+        },
+        {
+          "name": "Import Stock",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"productId\": 1,\n  \"amount\": 12,\n  \"reason\": \"Restock from supplier\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/inventory/import",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "inventory", "import"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Users",
+      "item": [
+        {
+          "name": "Get User Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/users/stats",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "users", "stats"]
+            }
+          }
+        },
+        {
+          "name": "Get Users (All)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/users?role=all",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "users"],
+              "query": [
+                { "key": "role", "value": "all" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Users (Filter)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/users?role=customer&keyword=nguyen",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "users"],
+              "query": [
+                { "key": "role", "value": "customer" },
+                { "key": "keyword", "value": "nguyen" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Toggle User Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/users/{{adminUserId}}/toggle-status",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "users", "{{adminUserId}}", "toggle-status"]
+            }
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/users/{{adminUserId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "users", "{{adminUserId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Reports",
+      "item": [
+        {
+          "name": "Revenue Last 7 Days",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/reports/revenue-7-days",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "reports", "revenue-7-days"]
+            }
+          }
+        },
+        {
+          "name": "Revenue By Brand",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/reports/revenue-by-brand",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "reports", "revenue-by-brand"]
+            }
+          }
+        },
+        {
+          "name": "KPI Summary",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/reports/kpi-summary",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "reports", "kpi-summary"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public - Products",
+      "item": [
+        {
+          "name": "Get Hot Products (Top 3)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/products/hot?limit=3",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "products", "hot"],
+              "query": [
+                { "key": "limit", "value": "3" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
