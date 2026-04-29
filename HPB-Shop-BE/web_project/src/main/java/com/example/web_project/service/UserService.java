@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.example.web_project.entity.User;
 import com.example.web_project.repository.UserRepository;
@@ -19,6 +21,25 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder; // Tiêm Bean từ SecurityConfig vào
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    private final RowMapper<User> userRowMapper = (rs, rowNum) -> {
+        User u = new User();
+        u.setUserId(rs.getInt("user_id"));
+        u.setUsername(rs.getString("username"));
+        u.setFullname(rs.getString("fullname"));
+        u.setEmail(rs.getString("email"));
+        u.setPassword(rs.getString("password"));
+        u.setPhone(rs.getString("phone"));
+        u.setRole(rs.getString("role"));
+        u.setStatus(rs.getString("status"));
+        u.setGender(rs.getString("gender"));
+        java.sql.Timestamp ts = rs.getTimestamp("created_at");
+        if (ts != null) u.setCreatedAt(ts.toLocalDateTime());
+        return u;
+    };
 
     public User register(User user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
@@ -37,14 +58,16 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    // [VULN] Auth Bypass — raw SQL nối chuỗi, không escape
     public User login(String identifier, String password) {
-        User user = userRepository.findByEmailOrUsername(identifier, identifier).orElse(null);
-        
-        // PHẢI DÙNG matches() chứ không được dùng .equals() nhé fen!
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return user;
+        String sql = "SELECT * FROM users WHERE username='" + identifier
+                   + "' AND password='" + password + "'";
+        try {
+            List<User> users = jdbcTemplate.query(sql, userRowMapper);
+            return users.isEmpty() ? null : users.get(0);
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
 
     // Lấy dữ liệu cho 3 thẻ thống kê trên giao diện
