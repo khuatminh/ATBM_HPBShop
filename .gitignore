@@ -1,0 +1,24 @@
+# Sub-projects giữ git history riêng
+HPB-Shop/
+HPB-Shop-BE/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Tools / agents
+.agent/
+.claude/
+
+# Build artifacts (phòng trường hợp để lẫn)
+target/
+node_modules/
+dist/
+build/
+*.log
+
+# Tạm
+/tmp/
+*.swp
