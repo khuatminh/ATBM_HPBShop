@@ -262,8 +262,8 @@ Chứa:
 
 ## 6. Workflow Git
 
-Chỉ làm việc trong repo `HPB-Shop-BE` (FE không động đến):
-1. Tạo branch `feat/sqli-demo` từ `main` hiện tại.
+Repo unified tại `/Users/justminh/Desktop/DH/BTL_ATBM/` (đã gộp HPB-Shop FE + HPB-Shop-BE từ 2 sub-repo trước đây). Frontend không bị sửa code, chỉ backend trong `HPB-Shop-BE/web_project/`:
+1. Đã tạo branch `feat/sqli-demo` từ `main`.
 2. Mỗi lỗ hổng commit riêng:
    - `feat: add Auth Bypass via JdbcTemplate raw SQL in login`
    - `feat: add UNION-based SQLi in product search`
