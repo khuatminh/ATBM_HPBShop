@@ -45,7 +45,7 @@ JPA/Hibernate dùng prepared statements nên không thể tạo SQLi qua đườ
 - **Loại bỏ:** Native query trong `@Repository` với `@Query(nativeQuery=true)` — không thể nối chuỗi tham số trực tiếp được mà không dùng SpEL trick xấu xí, kém realistic.
 
 ### 2.2 Strategy — modify in-place trên branch riêng
-- Tạo branch `feat/sqli-demo` trong repo `HPB-Shop-BE`.
+- Tạo branch `feat/sqli-demo` trong repo unified tại root `BTL_ATBM/`.
 - Sửa trực tiếp các Service hiện có. Không tạo endpoint song song `/api/vuln/*`.
 - Sau demo, chiếu project gốc (branch `main`) làm bản đã fix.
 
@@ -273,7 +273,7 @@ Repo unified tại `/Users/justminh/Desktop/DH/BTL_ATBM/` (đã gộp HPB-Shop F
    - `chore: seed extra users + add demo payload cheat sheet`
 3. Push branch (nếu muốn lưu trên remote).
 4. Trước demo: `git checkout feat/sqli-demo && mvn spring-boot:run`.
-5. Sau demo cần show "bản đã fix": chiếu sang folder/repo `HPB-Shop-BE` ở branch `main` (hoặc một clone riêng) để so sánh trực quan.
+5. Sau demo cần show "bản đã fix": `git checkout main` để chiếu code an toàn (branch `main` của repo unified, chưa cài lỗ hổng).
 
 ---
 
