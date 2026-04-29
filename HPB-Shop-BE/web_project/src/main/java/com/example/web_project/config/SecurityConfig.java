@@ -40,7 +40,8 @@ public class SecurityConfig {
                     "/v3/api-docs/**",
                     "/hpb-docs",
                     "/hpb-docs/**",
-                    "/api/products/**"
+                    "/api/products/**",
+                    "/error"
                 ).permitAll()
                 // Dùng hasAuthority thay vì hasRole nếu Role trong DB không có tiền tố ROLE_
                 .requestMatchers("/api/admin/**").hasAuthority("admin")
