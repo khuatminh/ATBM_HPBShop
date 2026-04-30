@@ -3,10 +3,12 @@ package com.example.web_project.service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.example.web_project.entity.Product;
@@ -18,6 +20,9 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
     // Lấy tất cả sản phẩm
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -28,8 +33,12 @@ public class ProductService {
         return productRepository.findById(id).orElse(null);
     }
 
-    public List<Product> searchProducts(String keyword) {
-        return productRepository.findByNameContainingIgnoreCaseOrBrandContainingIgnoreCase(keyword, keyword);
+    // [VULN] UNION-based SQLi — raw SQL nối chuỗi vào LIKE
+    public List<Map<String, Object>> searchProducts(String keyword) {
+        String sql = "SELECT product_id AS productId, name, brand, price, "
+                   + "image_url AS imageUrl, description, stock, sku "
+                   + "FROM products WHERE name LIKE '%" + keyword + "%'";
+        return jdbcTemplate.queryForList(sql);
     }
 
     // Lọc sản phẩm theo hãng (Yonex, Lining...)

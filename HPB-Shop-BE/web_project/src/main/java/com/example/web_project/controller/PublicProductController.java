@@ -2,6 +2,7 @@ package com.example.web_project.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,9 @@ public class PublicProductController {
     @Autowired
     private ProductService productService;
 
-    @Operation(summary = "Tìm kiếm vợt theo tên hoặc hãng")
+    @Operation(summary = "Tìm kiếm vợt theo tên hoặc hãng [VULN: UNION-based]")
     @GetMapping("/search")
-    public List<Product> search(@RequestParam String keyword) {
+    public List<Map<String, Object>> search(@RequestParam String keyword) {
         return productService.searchProducts(keyword);
     }
 
