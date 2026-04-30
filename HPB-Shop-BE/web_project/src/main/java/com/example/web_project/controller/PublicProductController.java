@@ -52,14 +52,14 @@ public class PublicProductController {
         return productService.getTopHotProducts(limit);
     }
 
-    @Operation(summary = "Lấy chi tiết sản phẩm theo ID")
+    @Operation(summary = "Lấy chi tiết sản phẩm theo ID [VULN: Error-based]")
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductDetail(@PathVariable Integer id) {
-        Product product = productService.getProductById(id);
-        if (product == null) {
+    public ResponseEntity<?> getProductDetail(@PathVariable String id) {
+        List<Map<String, Object>> result = productService.getProductById(id);
+        if (result.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(product);
+        return ResponseEntity.ok(result.get(0));
     }
 
     @Operation(summary = "Lọc sản phẩm nâng cao (Hãng, Giá, Sắp xếp)")

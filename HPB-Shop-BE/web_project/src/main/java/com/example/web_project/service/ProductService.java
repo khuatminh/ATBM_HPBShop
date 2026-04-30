@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,9 +29,16 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    // Lấy chi tiết 1 sản phẩm theo ID
-    public Product getProductById(Integer id) {
-        return productRepository.findById(id).orElse(null);
+    // [VULN] Error-based SQLi — raw SQL + expose MySQL error message
+    public List<Map<String, Object>> getProductById(String id) {
+        String sql = "SELECT product_id AS productId, name, brand, price, "
+                   + "image_url AS imageUrl, description, stock, sku "
+                   + "FROM products WHERE product_id=" + id;
+        try {
+            return jdbcTemplate.queryForList(sql);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     // [VULN] UNION-based SQLi — raw SQL nối chuỗi vào LIKE
