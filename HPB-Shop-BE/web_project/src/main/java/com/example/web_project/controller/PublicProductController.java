@@ -62,15 +62,14 @@ public class PublicProductController {
         return ResponseEntity.ok(result.get(0));
     }
 
-    @Operation(summary = "Lọc sản phẩm nâng cao (Hãng, Giá, Sắp xếp)")
+    @Operation(summary = "Lọc sản phẩm nâng cao [VULN: Boolean Blind]")
     @GetMapping("/filter")
-    public ResponseEntity<List<Product>> filterProducts(
+    public ResponseEntity<List<Map<String, Object>>> filterProducts(
             @RequestParam(required = false) String brand,
             @RequestParam(required = false) BigDecimal minPrice,
             @RequestParam(required = false) BigDecimal maxPrice,
             @RequestParam(defaultValue = "default") String sort) {
-        
-        List<Product> results = productService.getFilteredProducts(brand, minPrice, maxPrice, sort);
+        List<Map<String, Object>> results = productService.getFilteredProducts(brand, minPrice, maxPrice, sort);
         return ResponseEntity.ok(results);
     }
 }

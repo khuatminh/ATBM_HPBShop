@@ -62,16 +62,20 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public List<Product> getFilteredProducts(String brand, BigDecimal minPrice, BigDecimal maxPrice, String sortType) {
-        Sort sort = Sort.by("productId").descending(); // Mặc định mới nhất lên đầu
-
-        if ("priceAsc".equals(sortType)) {
-            sort = Sort.by("price").ascending();
-        } else if ("priceDesc".equals(sortType)) {
-            sort = Sort.by("price").descending();
+    // [VULN] Boolean Blind SQLi — raw SQL với brand nối chuỗi vào WHERE
+    public List<Map<String, Object>> getFilteredProducts(String brand, BigDecimal minPrice, BigDecimal maxPrice, String sortType) {
+        StringBuilder sql = new StringBuilder(
+            "SELECT product_id AS productId, name, brand, price, "
+          + "image_url AS imageUrl, description, stock, sku FROM products WHERE 1=1");
+        if (brand != null && !brand.isBlank()) {
+            sql.append(" AND brand='").append(brand).append("'"); // ← injection point
         }
-
-        return productRepository.filterProducts(brand, minPrice, maxPrice, sort);
+        if (minPrice != null) sql.append(" AND price >= ").append(minPrice);
+        if (maxPrice != null) sql.append(" AND price <= ").append(maxPrice);
+        if ("priceAsc".equals(sortType))       sql.append(" ORDER BY price ASC");
+        else if ("priceDesc".equals(sortType)) sql.append(" ORDER BY price DESC");
+        else                                    sql.append(" ORDER BY product_id DESC");
+        return jdbcTemplate.queryForList(sql.toString());
     }
 
     public List<Product> getTopHotProducts(int limit) {
