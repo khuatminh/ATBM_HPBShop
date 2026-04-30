@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,9 @@ public class OrderService {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     private int safeStock(Product product) {
         Integer stockValue = product == null ? null : product.getStock();
@@ -163,15 +167,18 @@ public class OrderService {
         return savedOrder;
     }
 
-    // Lấy lịch sử đơn hàng của khách hàng
-    public List<Order> getMyOrders(Integer userId, String status, String keyword) {
-        if (keyword != null && !keyword.isEmpty()) {
-            return orderRepository.searchMyOrders(userId, keyword); // Tìm kiếm
+    // [VULN] Time-based Blind SQLi — raw SQL với userId nối chuỗi vào WHERE
+    public List<Map<String, Object>> getMyOrders(String userId, String status, String keyword) {
+        StringBuilder sql = new StringBuilder(
+            "SELECT order_id AS orderId, user_id AS userId, total_price AS totalPrice, "
+          + "status, shipping_address AS shippingAddress, phone, payment_method AS paymentMethod, "
+          + "shipping_fee AS shippingFee, created_at AS createdAt "
+          + "FROM orders WHERE user_id=").append(userId); // ← injection point
+        if (status != null && !status.equalsIgnoreCase("all") && !status.isBlank()) {
+            sql.append(" AND status='").append(status).append("'");
         }
-        if (status != null && !status.equalsIgnoreCase("all")) {
-            return orderRepository.findByUser_UserIdAndStatusOrderByCreatedAtDesc(userId, status); // Lọc theo Tab
-        }
-        return orderRepository.findByUser_UserIdOrderByCreatedAtDesc(userId); // Tab "Tất cả"
+        sql.append(" ORDER BY created_at DESC");
+        return jdbcTemplate.queryForList(sql.toString());
     }
 
     // Logic Hủy đơn hàng
