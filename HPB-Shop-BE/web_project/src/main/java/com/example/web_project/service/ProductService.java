@@ -37,7 +37,7 @@ public class ProductService {
     public List<Map<String, Object>> searchProducts(String keyword) {
         String sql = "SELECT product_id AS productId, name, brand, price, "
                    + "image_url AS imageUrl, description, stock, sku "
-                   + "FROM products WHERE name LIKE '%" + keyword + "%'";
+                   + "FROM products WHERE name LIKE '%" + keyword + "%' OR brand LIKE '%" + keyword + "%'";
         return jdbcTemplate.queryForList(sql);
     }
 
