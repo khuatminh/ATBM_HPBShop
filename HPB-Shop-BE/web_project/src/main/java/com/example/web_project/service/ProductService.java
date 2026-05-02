@@ -29,6 +29,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    // Safe overload — dùng bởi CartController, AdminController (cần Product entity)
+    public Product getProductById(Integer id) {
+        return productRepository.findById(id).orElse(null);
+    }
+
     // [VULN] Error-based SQLi — raw SQL + expose MySQL error message
     public List<Map<String, Object>> getProductById(String id) {
         String sql = "SELECT product_id AS productId, name, brand, price, "
