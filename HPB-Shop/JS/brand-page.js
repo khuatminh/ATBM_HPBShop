@@ -119,7 +119,9 @@ function setupBrandFilterList() {
 
     const brandRadios = container.querySelectorAll(".brand-filter");
     brandRadios.forEach((radio) => {
-        radio.addEventListener("change", async (event) => {
+        // Dùng "click" thay vì "change" để tránh trình duyệt tự fire event
+        // khi checked attribute được set qua innerHTML (gây race condition với demo SQLi)
+        radio.addEventListener("click", async (event) => {
             const selectedBrand = normalizeBrand(event.target.value);
             currentBrand = selectedBrand;
             updateBrandQuery(selectedBrand);
@@ -188,7 +190,8 @@ async function fetchProducts(url) {
 }
 
 async function loadProductsByBrand(brand) {
-    const endpoint = `${API_PRODUCTS_URL}/brand/${encodeURIComponent(brand)}`;
+    // [VULN] Gọi /filter?brand= thay vì /brand/{brand} để Boolean Blind SQLi hoạt động qua UI
+    const endpoint = `${API_PRODUCTS_URL}/filter?brand=${encodeURIComponent(brand)}`;
     productsByBrand = await fetchProducts(endpoint);
 }
 
@@ -290,7 +293,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         setupPriceFilters();
         setupSort();
 
-        await loadProductsByBrand(currentBrand);
+        // [DEMO] Đọc raw brand từ URL (không normalize) để Boolean Blind SQLi hoạt động
+        const rawBrand = new URLSearchParams(window.location.search).get("brand") || currentBrand;
+        await loadProductsByBrand(rawBrand);
         applyAndRender();
     } catch (error) {
         console.error(error);

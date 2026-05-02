@@ -2,6 +2,7 @@ package com.example.web_project.controller;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,9 @@ public class PublicProductController {
     @Autowired
     private ProductService productService;
 
-    @Operation(summary = "Tìm kiếm vợt theo tên hoặc hãng")
+    @Operation(summary = "Tìm kiếm vợt theo tên hoặc hãng [VULN: UNION-based]")
     @GetMapping("/search")
-    public List<Product> search(@RequestParam String keyword) {
+    public List<Map<String, Object>> search(@RequestParam String keyword) {
         return productService.searchProducts(keyword);
     }
 
@@ -51,25 +52,24 @@ public class PublicProductController {
         return productService.getTopHotProducts(limit);
     }
 
-    @Operation(summary = "Lấy chi tiết sản phẩm theo ID")
+    @Operation(summary = "Lấy chi tiết sản phẩm theo ID [VULN: Error-based]")
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductDetail(@PathVariable Integer id) {
-        Product product = productService.getProductById(id);
-        if (product == null) {
+    public ResponseEntity<?> getProductDetail(@PathVariable String id) {
+        List<Map<String, Object>> result = productService.getProductById(id);
+        if (result.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(product);
+        return ResponseEntity.ok(result.get(0));
     }
 
-    @Operation(summary = "Lọc sản phẩm nâng cao (Hãng, Giá, Sắp xếp)")
+    @Operation(summary = "Lọc sản phẩm nâng cao [VULN: Boolean Blind]")
     @GetMapping("/filter")
-    public ResponseEntity<List<Product>> filterProducts(
+    public ResponseEntity<List<Map<String, Object>>> filterProducts(
             @RequestParam(required = false) String brand,
             @RequestParam(required = false) BigDecimal minPrice,
             @RequestParam(required = false) BigDecimal maxPrice,
             @RequestParam(defaultValue = "default") String sort) {
-        
-        List<Product> results = productService.getFilteredProducts(brand, minPrice, maxPrice, sort);
+        List<Map<String, Object>> results = productService.getFilteredProducts(brand, minPrice, maxPrice, sort);
         return ResponseEntity.ok(results);
     }
 }

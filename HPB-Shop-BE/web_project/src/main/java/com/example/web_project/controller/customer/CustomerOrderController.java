@@ -72,10 +72,10 @@ public class CustomerOrderController {
         return orderRepository.findByUser_UserIdOrderByCreatedAtDesc(userId);
     }
 
-    @Operation(summary = "Lấy danh sách đơn mua có lọc và tìm kiếm")
+    @Operation(summary = "Lấy danh sách đơn mua [VULN: Time-based Blind]")
     @GetMapping("/my-orders/{userId}")
-    public List<Order> getMyOrders(
-            @PathVariable Integer userId,
+    public List<Map<String, Object>> getMyOrders(
+            @PathVariable String userId,
             @RequestParam(required = false) String status,
             @RequestParam(required = false) String keyword) {
         return orderService.getMyOrders(userId, status, keyword);

@@ -4,7 +4,7 @@
 
 **Goal:** Cài 5 lỗ hổng SQL Injection vào HPB-Shop-BE để demo BTL môn ATBM, mỗi lỗ hổng tại 1 endpoint riêng, hỗ trợ cả demo bằng tay lẫn `sqlmap`.
 
-**Architecture:** Bypass JPA bằng cách inject `JdbcTemplate` (Spring built-in) vào tầng Service và build SQL nối chuỗi. Mọi raw SELECT alias cột DB sang camelCase để JSON khớp với hợp đồng FE — UI không gãy. Mỗi lỗ hổng commit riêng trên branch `feat/sqli-demo`.
+**Architecture:** Bypass JPA bằng cách inject `JdbcTemplate` (Spring built-in) vào tầng Service và build SQL nối chuỗi. Mọi raw SELECT alias cột DB sang camelCase để JSON khớp với hợp đồng FE — UI không gãy. Mỗi lỗ hổng commit riêng trên branch `feat/sqli-demo` của repo unified tại `/Users/justminh/Desktop/DH/BTL_ATBM/`.
 
 **Tech Stack:** Spring Boot 4.0.3, Spring JDBC (JdbcTemplate), MySQL 8.4, JPA/Hibernate (giữ nguyên cho phần không inject lỗ hổng).
 
@@ -14,7 +14,11 @@
 
 ## File Structure
 
-### Modified files (trong repo `HPB-Shop-BE`, branch `feat/sqli-demo`)
+> **Repo:** Unified git tại `/Users/justminh/Desktop/DH/BTL_ATBM/` (đã gộp HPB-Shop FE + HPB-Shop-BE).
+> **Branch:** `feat/sqli-demo` (đã tạo từ `main`).
+> Mọi lệnh `git` chạy ở root `BTL_ATBM/`. Không cần `cd HPB-Shop-BE` cho git nữa — các path `cd` chỉ cần khi chạy `mvn`.
+
+### Modified files (paths đã đầy đủ tính từ root)
 
 | File | Trách nhiệm |
 |------|-------------|
@@ -63,23 +67,18 @@
 **Files:**
 - Modify: `HPB-Shop-BE/web_project/src/main/resources/application.properties` (đã có change)
 
-- [ ] **Step 1: Verify đang ở branch `feat/sqli-demo`**
+- [ ] **Step 1: Verify đang ở branch `feat/sqli-demo` của repo unified**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
+cd /Users/justminh/Desktop/DH/BTL_ATBM
 git branch --show-current
-```
-Expected: `feat/sqli-demo`
-
-- [ ] **Step 2: Commit `application.properties` baseline change (đổi password DB)**
-
-```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
 git status
-git add web_project/src/main/resources/application.properties
-git commit -m "config: cập nhật MySQL password cho local dev"
 ```
-Expected: commit thành công, working tree clean.
+Expected: branch `feat/sqli-demo`, working tree clean (đổi password DB đã commit ở giai đoạn gộp repo).
+
+- [ ] **Step 2: ~~Commit application.properties baseline~~ (đã làm)**
+
+Bước này đã hoàn tất khi gộp repo — `application.properties` đã có password `minhkhuat123` trong commit "feat: gộp HPB-Shop FE + HPB-Shop-BE vào repo unified" trên `main`. Branch `feat/sqli-demo` thừa kế. Skip.
 
 - [ ] **Step 3: Verify backend đang chạy & DB có dữ liệu cơ bản**
 
@@ -174,8 +173,8 @@ Expected: `manager role: admin`
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
-git add web_project/scripts/seed-demo-users.sh
+cd /Users/justminh/Desktop/DH/BTL_ATBM
+git add HPB-Shop-BE/web_project/scripts/seed-demo-users.sh
 git commit -m "chore: thêm script seed 4 user demo (manager, staff01, vipuser, locked01)"
 ```
 
@@ -231,8 +230,8 @@ Expected: JSON response chứa `"message"` field với mô tả lỗi (không ch
 - [ ] **Step 4: Commit**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
-git add web_project/src/main/resources/application.properties
+cd /Users/justminh/Desktop/DH/BTL_ATBM
+git add HPB-Shop-BE/web_project/src/main/resources/application.properties
 git commit -m "config: expose error stack trace cho Error-based SQLi demo"
 ```
 
@@ -350,8 +349,8 @@ Mở http://localhost:5500/Dang-nhap.html, login với `admin` / `admin123` → 
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
-git add web_project/src/main/java/com/example/web_project/service/UserService.java
+cd /Users/justminh/Desktop/DH/BTL_ATBM
+git add HPB-Shop-BE/web_project/src/main/java/com/example/web_project/service/UserService.java
 git commit -m "feat(vuln): cài Auth Bypass SQLi trong UserService.login() (raw SQL)"
 ```
 
@@ -453,9 +452,9 @@ Mở http://localhost:5500/Trang-chu.html, gõ `Yonex` vào ô search → hiện
 - [ ] **Step 8: Commit**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
-git add web_project/src/main/java/com/example/web_project/service/ProductService.java \
-        web_project/src/main/java/com/example/web_project/controller/PublicProductController.java
+cd /Users/justminh/Desktop/DH/BTL_ATBM
+git add HPB-Shop-BE/web_project/src/main/java/com/example/web_project/service/ProductService.java \
+        HPB-Shop-BE/web_project/src/main/java/com/example/web_project/controller/PublicProductController.java
 git commit -m "feat(vuln): cài UNION-based SQLi trong /api/products/search (raw SQL)"
 ```
 
@@ -560,9 +559,9 @@ Mở http://localhost:5500/Trang-chu.html, click 1 sản phẩm → trang chi ti
 - [ ] **Step 8: Commit**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
-git add web_project/src/main/java/com/example/web_project/service/ProductService.java \
-        web_project/src/main/java/com/example/web_project/controller/PublicProductController.java
+cd /Users/justminh/Desktop/DH/BTL_ATBM
+git add HPB-Shop-BE/web_project/src/main/java/com/example/web_project/service/ProductService.java \
+        HPB-Shop-BE/web_project/src/main/java/com/example/web_project/controller/PublicProductController.java
 git commit -m "feat(vuln): cài Error-based SQLi trong /api/products/{id} (expose MySQL error)"
 ```
 
@@ -668,9 +667,9 @@ Mở http://localhost:5500/San-pham-theo-hang.html?brand=Yonex → hiện 4 sả
 - [ ] **Step 8: Commit**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
-git add web_project/src/main/java/com/example/web_project/service/ProductService.java \
-        web_project/src/main/java/com/example/web_project/controller/PublicProductController.java
+cd /Users/justminh/Desktop/DH/BTL_ATBM
+git add HPB-Shop-BE/web_project/src/main/java/com/example/web_project/service/ProductService.java \
+        HPB-Shop-BE/web_project/src/main/java/com/example/web_project/controller/PublicProductController.java
 git commit -m "feat(vuln): cài Boolean Blind SQLi trong /api/products/filter (raw SQL brand)"
 ```
 
@@ -804,9 +803,9 @@ Login với `customer1`/`123456` ở http://localhost:5500/Dang-nhap.html, vào 
 - [ ] **Step 9: Commit**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
-git add web_project/src/main/java/com/example/web_project/service/OrderService.java \
-        web_project/src/main/java/com/example/web_project/controller/customer/CustomerOrderController.java
+cd /Users/justminh/Desktop/DH/BTL_ATBM
+git add HPB-Shop-BE/web_project/src/main/java/com/example/web_project/service/OrderService.java \
+        HPB-Shop-BE/web_project/src/main/java/com/example/web_project/controller/customer/CustomerOrderController.java
 git commit -m "feat(vuln): cài Time-based Blind SQLi trong /api/customer/orders/my-orders/{userId}"
 ```
 
@@ -1003,7 +1002,7 @@ wc -l /Users/justminh/Desktop/DH/BTL_ATBM/docs/DEMO-SQLI-PAYLOADS.md
 ```
 Expected: file ≥ 100 dòng, tồn tại.
 
-- [ ] **Step 3: Commit ở root git (vì file ở `docs/` của root, không phải BE)**
+- [ ] **Step 3: Commit**
 
 ```bash
 cd /Users/justminh/Desktop/DH/BTL_ATBM
@@ -1017,14 +1016,14 @@ git commit -m "docs: thêm cheat sheet 5 payload SQLi + workflow demo"
 
 Mục tiêu: chạy cả 5 attack lần lượt + verify FE bình thường, đảm bảo không có regression.
 
-- [ ] **Step 1: Verify backend đang chạy ở branch `feat/sqli-demo`**
+- [ ] **Step 1: Verify backend đang chạy ở branch `feat/sqli-demo` của repo unified**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
+cd /Users/justminh/Desktop/DH/BTL_ATBM
 git branch --show-current
-git log --oneline | head -8
+git log --oneline | head -10
 ```
-Expected: branch `feat/sqli-demo`, log có 7+ commit (1 baseline + 6 feature commits).
+Expected: branch `feat/sqli-demo`, log có ≥ 6 feature commits (Auth Bypass, UNION, Error, Blind, Time, config + seed) trên top các commit baseline.
 
 - [ ] **Step 2: Test cả 5 attack liên tiếp**
 
@@ -1071,7 +1070,7 @@ Mở browser, kiểm tra từng trang:
 - [ ] **Step 4: Verify "bản đã fix" hoạt động đúng (chuyển branch `main`)**
 
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
+cd /Users/justminh/Desktop/DH/BTL_ATBM
 git stash 2>&1  # nếu có working changes
 git checkout main
 # Restart
@@ -1093,30 +1092,27 @@ curl -s -o /dev/null -w "%{http_code}\n" -X POST http://localhost:8080/api/auth/
 ```
 Expected: `401` (an toàn). Sau khi verify xong, chuyển lại branch demo:
 ```bash
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
+cd /Users/justminh/Desktop/DH/BTL_ATBM
 git checkout feat/sqli-demo
 # Restart backend lần cuối để sẵn sàng demo
 lsof -ti:8080 | xargs kill -9 2>/dev/null || true
 sleep 2
-cd web_project
+cd HPB-Shop-BE/web_project
 nohup mvn -DskipTests spring-boot:run > /tmp/hpb-backend.log 2>&1 &
 ```
 
 - [ ] **Step 5: Tổng kết git history**
 
 ```bash
-echo "=== HPB-Shop-BE branch feat/sqli-demo ==="
-cd /Users/justminh/Desktop/DH/BTL_ATBM/HPB-Shop-BE
+cd /Users/justminh/Desktop/DH/BTL_ATBM
+echo "=== Diff giữa main và feat/sqli-demo ==="
 git log --oneline main..feat/sqli-demo
 
 echo ""
-echo "=== Root project (BTL_ATBM) ==="
-cd /Users/justminh/Desktop/DH/BTL_ATBM
-git log --oneline
+echo "=== Tổng quan log ==="
+git log --oneline -15
 ```
-Expected:
-- HPB-Shop-BE feat/sqli-demo có 7 commit (config baseline + 6 feature)
-- Root có ≥ 2 commit (initial + DEMO-SQLI-PAYLOADS.md)
+Expected: branch `feat/sqli-demo` có ≥ 6 commit feature so với `main` (1 commit cho mỗi: seed users, config, 5 lỗ hổng, cheat sheet).
 
 ---
 
